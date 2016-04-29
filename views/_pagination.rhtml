@@ -1,0 +1,6 @@
+<% if newer_pages? shipments %>
+  <a class="float-left" href="/shipments?after_id=<%= shipments.shipments.first.id %>">< newer labels</a>
+<% end %>
+<% if older_pages? shipments %>
+  <a class="float-right" href="/shipments?before_id=<%= shipments.shipments.last.id %>">older labels ></a>
+<% end %>

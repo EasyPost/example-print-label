@@ -1,0 +1,41 @@
+<h3>Labels</h3>
+
+<%= erb :_pagination, locals: {shipments: shipments} %>
+
+<table>
+  <tr>
+    <th>Created at</th>
+    <th>To Address</th>
+    <th>Mode</th>
+    <th>ZPL</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% shipments.shipments.each do |shipment| %>
+    <tr>
+      <td><%= DateTime.parse(shipment.postage_label.created_at).strftime("%-m/%d/%y %-l:%M%P") %></td>
+      <td>
+        <% addr = shipment.to_address %>
+        <b><%= addr.name %></b><br/>
+        <%= addr.street1 %><br/>
+        <% if addr.street2 && addr.street2 != "" %>
+          <%= addr.street2 %><br/>
+        <% end %>
+        <%= addr.city %>, <%= addr.state %> <%= addr.zip %><br/>
+      </td>
+      <td><%= shipment.mode %></td>
+      <td>
+        <% if shipment.postage_label.label_zpl_url %>
+          <a class="button" href="/shipments/<%= shipment.id %>/zpl/print">print</a>
+          <a class="button" href="<%= shipment.postage_label.label_zpl_url %>">download</a>
+        <% else %>
+          <a class="button" href="/shipments/<%= shipment.id %>/zpl/generate">generate</a>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+</table>
+
+<%= erb :_pagination, locals: {shipments: shipments} %>
