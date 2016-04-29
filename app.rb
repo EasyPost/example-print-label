@@ -55,6 +55,7 @@ class App < Sinatra::Base
   get "/" do
     redirect "/shipments"
   end
-  
+
+  # run if this file is executed directly
   run! if app_file == $0
 end
