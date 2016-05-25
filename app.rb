@@ -12,13 +12,13 @@ class App < Sinatra::Base
     Dotenv.load
 
     EasyPost.api_key = ENV['EASYPOST_API_KEY']
-    
+
     set :printnode_client, PrintNode::Client.new(PrintNode::Auth.new(ENV["PRINTNODE_API_KEY"]))
     set :printer_id, ENV['PRINTNODE_PRINTER_ID']
   end
 
   helpers PrintLabel::Helpers
-  
+
   get "/shipments" do
     opts = {}
     if params["before_id"]
@@ -26,7 +26,7 @@ class App < Sinatra::Base
     elsif params["after_id"]
       opts.merge!(after_id: params["after_id"])
     end
-    
+
     shipments = ::EasyPost::Shipment.all(opts)
     redirect back if shipments.shipments.count == 0
     erb :shipments, locals: {shipments: shipments}
@@ -34,10 +34,7 @@ class App < Sinatra::Base
 
   get "/shipments/:shipment_id/zpl/generate" do
     shipment = ::EasyPost::Shipment.retrieve(params['shipment_id'])
-    if !shipment.postage_label.label_zpl_url
-      ::EasyPost.request(:get, "/shipments/#{params['shipment_id']}/label",
-                         nil, file_format: 'ZPL')
-    end
+    shipment.label(file_format: "ZPL") unless shipment.postage_label.label_zpl_url
     redirect back
   end
 
@@ -51,7 +48,7 @@ class App < Sinatra::Base
     settings.printnode_client.create_printjob(printjob, {})
     redirect back
   end
-  
+
   get "/" do
     redirect "/shipments"
   end

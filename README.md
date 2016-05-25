@@ -11,14 +11,14 @@ computer, and will remotely send ZPL labels to any PrintNode enabled printer.
 ### Requirements
 
 1. A Windows or Mac computer running [Ruby](https://www.ruby-lang.org/en/)
-   [Bundler](http://bundler.io/) (it must be able to run the PrintNode client) 
+   [Bundler](http://bundler.io/) (it must be able to run the PrintNode client)
 1. Some type of printer that supports ZPL files (we used a Zebra ZP450)
 1. An [EasyPost account](https://www.easypost.com/signup)
 1. A [PrintNode account](https://app.printnode.com/account/register)
 
 ### Printer Setup
 
-PrintNode has clear [documentation on getting your printer set up](https://www.printnode.com/docs/introduction/) 
+PrintNode has clear [documentation on getting your printer set up](https://www.printnode.com/docs/introduction/)
 so if you encounter any issues, refer there for more details.
 
 1. Download and install the [PrintNode client](https://www.printnode.com/download/)
@@ -31,7 +31,7 @@ so if you encounter any issues, refer there for more details.
        in your terminal to install the printer with the name `raw_zebra`. You will
        need to replace the `usb://Zebra%20Technologies/ZTC%20ZP%20450-200dpi?serial=XXXXXXXXXXXX`
        with what the previous command returned for you.
-    1. Once this is all set, you should see a new entry on your PrintNode 
+    1. Once this is all set, you should see a new entry on your PrintNode
        [Printers list](https://app.printnode.com/account/printer)
 
 
