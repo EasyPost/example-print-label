@@ -28,7 +28,6 @@ class App < Sinatra::Base
     end
 
     shipments = ::EasyPost::Shipment.all(opts)
-    redirect back if shipments.shipments.count == 0
     erb :shipments, locals: {shipments: shipments}
   end
 
